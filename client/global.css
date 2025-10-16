@@ -1,0 +1,376 @@
+/** @import must precede all other statements */
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&display=swap");
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  /**
+   * Tailwind CSS theme
+   * tailwind.config.ts expects the following color variables to be expressed as HSL values.
+   * A different format will require also updating the theme in tailwind.config.ts.
+  */
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 0 0% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 0 0% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 0 0% 10%;
+
+    --primary: 0 0% 0%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 0 0% 95%;
+    --secondary-foreground: 0 0% 12%;
+
+    --muted: 0 0% 96%;
+    --muted-foreground: 0 0% 40%;
+
+    --accent: 0 0% 95%;
+    --accent-foreground: 0 0% 12%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 88%;
+    --input: 0 0% 88%;
+    --ring: 0 0% 0%;
+
+    --radius: 0.5rem;
+
+    --sidebar-background: 0 0% 98%;
+
+    --sidebar-foreground: 0 0% 12%;
+
+    --sidebar-primary: 0 0% 0%;
+
+    --sidebar-primary-foreground: 0 0% 98%;
+
+    --sidebar-accent: 0 0% 96%;
+
+    --sidebar-accent-foreground: 0 0% 12%;
+
+    --sidebar-border: 0 0% 88%;
+
+    --sidebar-ring: 0 0% 0%;
+  }
+
+  .dark {
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
+
+    --card: 0 0% 0%;
+    --card-foreground: 0 0% 100%;
+
+    --popover: 0 0% 0%;
+    --popover-foreground: 0 0% 100%;
+
+    --primary: 0 0% 100%;
+    --primary-foreground: 0 0% 0%;
+
+    --secondary: 0 0% 12%;
+    --secondary-foreground: 0 0% 100%;
+
+    --muted: 0 0% 14%;
+    --muted-foreground: 0 0% 70%;
+
+    --accent: 0 0% 12%;
+    --accent-foreground: 0 0% 100%;
+
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 0 0% 18%;
+    --input: 0 0% 18%;
+    --ring: 0 0% 100%;
+    --sidebar-background: 0 0% 0%;
+    --sidebar-foreground: 0 0% 100%;
+    --sidebar-primary: 0 0% 100%;
+    --sidebar-primary-foreground: 0 0% 0%;
+    --sidebar-accent: 0 0% 12%;
+    --sidebar-accent-foreground: 0 0% 100%;
+    --sidebar-border: 0 0% 18%;
+    --sidebar-ring: 0 0% 100%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
+/* Modal glass effect */
+.glass {
+  position: relative;
+  z-index: 60; /* ensure modal and its pseudo element sit above page content */
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.12);
+  /* keep inner content feel sharp; localized blur is provided by the pseudo element */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35);
+  overflow: visible;
+}
+
+
+/* Overlay covers the full viewport as a dimmer only (no blur) */
+.modal-overlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0,0,0,0.25);
+}
+
+/* scroll reveal */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0) rotate(0.01deg);
+  transition: opacity 700ms cubic-bezier(.2,.9,.3,1), transform 700ms cubic-bezier(.2,.9,.3,1);
+}
+
+.image-column img {
+  transition: transform 400ms ease, filter 400ms ease;
+}
+.image-column img:hover {
+  transform: scale(1.06) translateY(-6px) rotate(-0.7deg);
+  filter: saturate(1.05) contrast(1.02);
+}
+
+/* floating subtle animations */
+@keyframes floaty {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-8px) rotate(-0.2deg); }
+  100% { transform: translateY(0px); }
+}
+.float { animation: floaty 6s ease-in-out infinite; }
+.float-slow { animation: floaty 10s ease-in-out infinite; }
+
+/* interactive image card */
+.interactive {
+  transition: transform 350ms cubic-bezier(.2,.9,.3,1), box-shadow 350ms ease, filter 250ms ease;
+}
+.interactive:hover {
+  transform: translateY(-8px) scale(1.02) translateZ(8px);
+  box-shadow: 0 28px 60px rgba(0,0,0,0.18);
+  filter: saturate(1.06) contrast(1.03);
+}
+
+/* consistent media card for images */
+.media-card {
+  width: 100%;
+  height: 12rem; /* default card height */
+  overflow: hidden;
+  border-radius: 0.5rem;
+  display: block;
+  background: var(--muted);
+}
+@media (min-width: 768px) {
+  .media-card { height: 14rem; }
+}
+@media (min-width: 1024px) {
+  .media-card { height: 16rem; }
+}
+.media-card img, .media-card .parallax-image, .media-card .bg-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 420ms cubic-bezier(.2,.9,.3,1), filter 420ms ease;
+  will-change: transform, filter;
+}
+.media-card:hover img, .media-card:hover .parallax-image { transform: scale(1.04) translateY(-6px); filter: saturate(1.05) contrast(1.02); }
+
+/* Hero 3D/parallax */
+.hero-slide { perspective: 1200px; --tx: 0px; --ty: 0px; --rx: 0deg; --ry: 0deg; }
+.hero-image {
+  transform: translate3d(calc(var(--tx) * 0.55), calc(var(--ty) * 0.55), 0) scale(1.03) rotateX(calc(var(--rx) * 1)) rotateY(calc(var(--ry) * 1));
+  transition: transform 420ms cubic-bezier(.16,.84,.24,1), filter 420ms ease;
+  will-change: transform;
+  filter: brightness(0.95) contrast(1.02) saturate(1.03) sepia(0.01);
+}
+.hero-image::after { content: ""; }
+.hero-content {
+  transform: translate3d(calc(var(--tx) * 0.18), calc(var(--ty) * 0.18), 0) translateZ(10px) rotateX(calc(var(--rx) * 0.18)) rotateY(calc(var(--ry) * 0.18));
+  transition: transform 380ms cubic-bezier(.2,.9,.3,1), box-shadow 380ms ease;
+  will-change: transform;
+}
+.hero-content h2 {
+  text-shadow: 0 8px 24px rgba(0,0,0,0.45);
+}
+.hero-content a {
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+/* Home showcase */
+.showcase {
+  perspective: 1000px;
+}
+.showcase-reveal {
+  opacity: 0;
+  transform: translateY(20px) translateZ(0) rotateX(6deg) scale(0.995);
+  transition: transform 860ms cubic-bezier(.16,.84,.24,1), opacity 860ms ease;
+}
+.showcase-reveal.in-view {
+  opacity: 1;
+  transform: translateY(0) translateZ(0) rotateX(0deg) scale(1);
+}
+
+/* page enter animation */
+.page-transition {
+  transform-origin: top center;
+  --gx: 0; --gy: 0;
+  will-change: transform;
+}
+.page-enter {
+  opacity: 0;
+  transform: translateY(18px) scale(0.996) rotateX(1deg);
+}
+.page-enter.page-enter-active {
+  transition: transform 700ms cubic-bezier(.2,.9,.3,1), opacity 700ms ease;
+  opacity: 1;
+  transform: translateY(0) scale(1) rotateX(0deg);
+}
+.page-enter-active > * {
+  transition: transform 700ms cubic-bezier(.2,.9,.3,1), opacity 700ms ease;
+}
+
+/* subtle page parallax based on pointer */
+:root { --gx: 0; --gy: 0; }
+.page-transition {
+  transform: translate3d(calc(var(--gx) * 6px), calc(var(--gy) * 4px), 0) rotateX(calc(var(--gy) * 0.3deg)) rotateY(calc(var(--gx) * 0.3deg));
+}
+
+/* targeted reveals */
+.reveal { opacity: 0; transform: translateY(14px) translateZ(0) rotateX(3.2deg); }
+.reveal.in-view { opacity: 1; transform: translateY(0) translateZ(0) rotateX(0deg); transition: transform 640ms cubic-bezier(.2,.9,.3,1), opacity 640ms ease; }
+.showcase-reveal.in-view .reveal-line { transform: translateZ(0) translateY(0) rotateX(0deg); opacity: 1; transition-delay: 100ms; }
+
+.reveal-line {
+  display: inline-block;
+  transform-origin: left center;
+  transform: translateZ(60px) translateY(6px) rotateX(10deg);
+  opacity: 0;
+  transition: transform 820ms cubic-bezier(.2,.9,.3,1), opacity 820ms ease;
+}
+.showcase-reveal.in-view .reveal-line {
+  transform: translateZ(0) translateY(0) rotateX(0deg);
+  opacity: 1;
+}
+
+.parallax-wrap { perspective: 900px; }
+.parallax-image {
+  transition: transform 600ms cubic-bezier(.2,.9,.3,1), filter 600ms ease;
+  will-change: transform;
+  background-size: cover;
+  background-position: center;
+}
+
+/* Animated heading tweaks */
+.animated-heading { line-height: 1.06; }
+.animated-heading .reveal-line { display: block; overflow: hidden; }
+.animated-heading .reveal-line::after { content: ""; display: inline-block; width: 0; height: 1px; background: transparent; }
+
+/* Mosaic grid for interactive about section */
+.mosaic-grid {
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  gap: 1rem;
+}
+@media (min-width: 640px) { .mosaic-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1024px) { .mosaic-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.mosaic-card {
+  position: relative;
+  height: 14rem;
+  overflow: hidden;
+  border-radius: 0.75rem;
+  padding: 0;
+  border: 1px solid rgba(0,0,0,0.04);
+  background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(0,0,0,0.02));
+  cursor: pointer;
+  display: flex;
+  align-items: flex-end;
+  transform-style: preserve-3d;
+  transition: transform 420ms cubic-bezier(.2,.9,.3,1), box-shadow 420ms ease;
+}
+.mosaic-card:focus { outline: 2px solid rgba(0,0,0,0.06); }
+.mosaic-card:hover { transform: translateY(-8px) scale(1.02); box-shadow: 0 28px 60px rgba(0,0,0,0.14); }
+
+.mosaic-card .bg-img {
+  position: absolute; inset: 0; background-size: cover; background-position: center; transform: translateZ(0) scale(1.04);
+  transition: transform 520ms cubic-bezier(.2,.9,.3,1), filter 520ms ease;
+  will-change: transform, filter;
+  filter: saturate(1.02) contrast(1.02);
+}
+.mosaic-card .mosaic-body {
+  position: relative; z-index: 10; padding: 1rem; background: linear-gradient(180deg, rgba(0,0,0,0.0), rgba(0,0,0,0.04)); width: 100%;
+}
+.mosaic-card h4 { color: var(--foreground); }
+.mosaic-card p { color: color-mix(in srgb, var(--foreground) 80%, transparent); }
+
+/* pointer-based micro-parallax using CSS vars */
+.mosaic-card { --sy: 0px; }
+.mosaic-card .bg-img { transform: translate3d(0, var(--sy, 0px), 0) scale(1.04); }
+
+/* reduce height on small screens */
+@media (max-width: 640px) { .mosaic-card { height: 12rem; } }
+
+/* page hero banner */
+
+/*  */
+
+/*  */
+.page-hero {
+  position: relative;
+  border-radius: 0.75rem;
+  overflow: hidden;
+  height: 560px;
+  display: flex;
+
+  align-items: flex-end;
+}
+.page-hero .bg {
+  position: absolute; inset: 0; background-size: cover; background-position: center; filter: brightness(0.62) contrast(0.98) saturate(1.03) sepia(0.02);
+}
+.page-hero::before {
+  content: "";
+  position: absolute; inset: 0;
+  background: linear-gradient(180deg, rgba(18,12,8,0.26), rgba(10,8,6,0.18));
+  pointer-events: none;
+  mix-blend-mode: multiply;
+  z-index: 2;
+}
+.page-hero .hero-inner { position: relative; z-index: 5; padding: 1rem; color: var(--primary-foreground); }
+.page-hero .hero-inner h1 { color: var(--primary-foreground); }
+
+/* Modal glass tweaks for ImageModal */
+.glass { background: rgba(255,255,255,0.04); backdrop-filter: none; }
+.fixed .glass { backdrop-filter: blur(6px); }
+
+/* mobile: slightly faster reveals and touch-friendly behavior */
+@media (max-width: 640px) {
+  .reveal.in-view { transition-duration: 420ms !important; }
+  .showcase-reveal { transform: translateY(12px); }
+  .media-card { height: 12rem; }
+}
+
+/* improve accessibility: reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  * { transition-duration: 0ms !important; animation-duration: 0ms !important; }
+}
