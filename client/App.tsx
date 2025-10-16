@@ -11,8 +11,8 @@ import About from "./pages/About";
 import Workshop from "./pages/Workshop";
 import Contact from "./pages/Contact";
 import NotFound from "./pages/NotFound";
-import CollectionsPage from "./pages/Collections";
-import CollectionPage from "./pages/CollectionPage";
+// import CollectionsPage from "./pages/Collections";
+// import CollectionPage from "./pages/CollectionPage";
 
 const queryClient = new QueryClient();
 
