@@ -1,6 +1,7 @@
-import React from "react";
+import React, { useEffect} from "react";
 import { useHome } from "@/lib/api";
 import { Carousel, CarouselContent, CarouselItem } from "@/components/ui/carousel";
+import OptimizedImage from "../ui/OptimizedImage";
 
 export default function Hero() {
   const { data } = useHome();
@@ -9,6 +10,22 @@ export default function Hero() {
     { id: 'f2', title: 'Modern depth, timeless craft', subtitle: 'Presented with care', imageUrl: 'https://images.unsplash.com/photo-1520975698516-7f2a3d7c7b0a?q=80&w=1800&auto=format&fit=crop' },
   ];
   const slides = data?.hero?.length ? data.hero : fallback;
+
+  // new code
+  useEffect(() => {
+    if (slides[0]?.imageUrl) {
+      const link = document.createElement("link");
+      link.rel = "preload";
+      link.as = "image";
+      link.href = slides[0].imageUrl;
+      document.head.appendChild(link);
+
+      return () => {
+        document.head.removeChild(link);
+      };
+    }
+  }, [slides]);
+
 
   const handleMove = (e: React.PointerEvent<HTMLDivElement>) => {
     const el = e.currentTarget;
@@ -39,13 +56,16 @@ export default function Hero() {
     <section className="relative">
       <Carousel className="w-full">
         <CarouselContent>
-          {slides.map((slide) => (
+          {slides.map((slide, index) => (
             <CarouselItem key={slide.id}>
               <div className="hero-slide relative h-[72vh] md:h-[80vh]" onPointerMove={handleMove} onPointerLeave={handleLeave}>
-                <img
+                <OptimizedImage
                   src={slide.imageUrl}
                   alt={slide.title}
-                  loading="lazy"
+                  objectFit="cover"
+                  priority={index === 0} // Prioritize first slide
+                  sizes="100vw"
+                  // loading="lazy"
                   className="hero-image absolute inset-0 h-full w-full object-cover object-center"
                 />
 

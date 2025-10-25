@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from "react";
-
+import OptimizedImage from "../ui/OptimizedImage";
 import PageHero from "@/components/ui/PageHero";
 
 export default function WorkshopContent() {
@@ -25,7 +25,7 @@ export default function WorkshopContent() {
   const blocks = [
     {
       title: 'Experience the Art of Hand Block Printing',
-      img: '/images/workshop/wbm1.jpg?q=80&w=1400&auto=format&fit=crop',
+      img: '/images/workshop/wbm1.webp',
       content: (
         <>
           <p className="mb-2">At Applique, we don’t just create fabrics — we celebrate the story behind them. Our Hand Block Printing Workshop invites you to step into the heart of Jaipur’s artistic heritage and experience the age-old process of textile printing that has inspired designers and craftsmen for centuries.</p>
@@ -35,7 +35,7 @@ export default function WorkshopContent() {
     },
     {
       title: 'Discover the Magic Behind Every Print',
-      img: '/images/workshop/wbm2.jpg?q=80&w=1400&auto=format&fit=crop',
+      img: '/images/workshop/wbm2.webp',
       content: (
         <>
           <ul className="text-foreground/80 leading-relaxed list-disc pl-5 mb-3">
@@ -50,7 +50,7 @@ export default function WorkshopContent() {
     },
     {
       title: 'A Creative Collaboration Between Buyer & Artisan',
-      img: '/images/workshop/wbm4.jpg?q=80&w=1400&auto=format&fit=crop',
+      img: '/images/workshop/wbm4.webp',
       content: (
         <>
           <p className="text-foreground/80 mb-2">At Applique, we believe creativity thrives when people connect with craftsmanship. Through our workshop, international buyers and designers can collaborate directly with artisans — understanding the nuances of design, scale, and pattern repetition that influence final collections.</p>
@@ -77,7 +77,7 @@ export default function WorkshopContent() {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
               <div className={`md:col-span-6 ${i % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
                 <div className="overflow-hidden rounded-md media-card">
-                  <img src={b.img} alt={b.title} loading="lazy" className="w-full h-full object-cover" />
+                  <OptimizedImage src={b.img} alt={b.title}  className="w-full" objectFit="cover" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
               </div>
 

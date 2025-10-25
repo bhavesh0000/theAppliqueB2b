@@ -601,3 +601,110 @@
 .video-controls::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.7);
 }
+
+/* Image Optimization Styles - Add these to your existing global.css */
+
+/* Optimize image rendering */
+img {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* Prevent layout shift with aspect-ratio */
+img[width][height] {
+  height: auto;
+}
+
+/* Hardware acceleration for images */
+.media-card img,
+.interactive img,
+.hero-image,
+.parallax-image {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+/* Optimize animations */
+@media (prefers-reduced-motion: no-preference) {
+  .media-card img,
+  .interactive img {
+    will-change: transform;
+  }
+}
+
+/* Progressive image loading */
+.progressive-image {
+  position: relative;
+  overflow: hidden;
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--muted) / 0.8) 50%,
+    hsl(var(--muted)) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+/* Blur-up placeholder effect */
+.image-blur-placeholder {
+  filter: blur(20px);
+  transform: scale(1.1);
+  transition: filter 0.5s ease-out, transform 0.5s ease-out;
+}
+
+.image-blur-placeholder.loaded {
+  filter: blur(0);
+  transform: scale(1);
+}
+
+/* Optimize video loading */
+video {
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* Preload critical images hint */
+link[rel="preload"][as="image"] {
+  /* Browser will prioritize these */
+}
+
+/* Lazy loading optimization */
+img[loading="lazy"] {
+  /* Native lazy loading is hardware accelerated */
+  content-visibility: auto;
+}
+
+/* Reduce motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .progressive-image {
+    animation: none;
+  }
+  
+  img {
+    transition: none !important;
+  }
+}
+
+/* Modern image formats support */
+@supports (image-rendering: -webkit-optimize-contrast) {
+  img {
+    image-rendering: -webkit-optimize-contrast;
+  }
+}
+
+/* GPU acceleration for transforms */
+.transform-gpu {
+  transform: translateZ(0);
+  will-change: transform;
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useRef } from "react";
 import AnimatedHeading from "@/components/ui/AnimatedHeading";
 import { Link } from "react-router-dom";
 import PageHero from "@/components/ui/PageHero";
+import OptimizedImage from "../ui/OptimizedImage";
 
 function useReveal() {
   const containerRef = useRef<HTMLDivElement | null>(null);
@@ -36,7 +37,7 @@ export default function AboutContent() {
     {
       id: "journey",
       title: "Our Journey",
-      img: "/images/about/Ab2.jpg?q=100&w=1400&h=1200&auto=format",
+      img: "/images/about/Ab2.webp",
       content: (
         <>
           <p className="mb-2">Our journey began in 2020 when our founder — born into a traditional weaver community — decided to transform a lifelong passion for colors, fabrics, and artistry into a purpose-driven business. After six years of experience in the aviation industry, they returned to their roots to revive the timeless legacy of Indian block printing and showcase it to the world.</p>
@@ -49,7 +50,7 @@ export default function AboutContent() {
     {
       id: "expertise",
       title: "Our Expertise",
-      img: "/images/about/Ab1.jpg?q=100&w=1000&h=150%&auto=format",
+      img: "/images/about/Ab1.webp",
       content: (
         <>
           <p className="mb-2">We specialize in hand block printed home décor fabrics, apparel textiles, and customized designs for global designers and retailers. Our collections merge tradition with innovation, offering diverse options for interior designers, boutiques, and fashion labels.</p>
@@ -60,7 +61,7 @@ export default function AboutContent() {
     {
       id: "vision",
       title: "Global Collaborations & Vision",
-      img: "/images/about/Ab5.jpg?q=100&w=1400&h=1200&auto=format",
+      img: "/images/about/Ab5.webp",
       content: (
         <>
           <p className="mb-2">As a trusted Jaipur textile exporter, The Applique has built strong collaborations with boutiques, fashion designers, and retailers across India as well as globally. Our hand block printed fabrics are cherished by clients who appreciate authentic craftsmanship, slow fashion values, and cultural artistry.</p>
@@ -71,7 +72,7 @@ export default function AboutContent() {
     {
       id: "workshop",
       title: "Experience & Workshop",
-      img: "/images/workshop/wbm2.jpg?q=100&w=1400&h=1200&auto=format",
+      img: "/images/workshop/wbm2.webp",
       content: (
         <>
           <p className="mb-2">Experience the art of hand block printing through our immersive workshops — step into Jaipur’s artistic heritage and witness the process from carved block to final print. Bookings are open year-round for buyers, designers, and craft enthusiasts.</p>
@@ -83,13 +84,13 @@ export default function AboutContent() {
       id: "collabs",
       title: "Design Partnerships",
       // img: "/images/about/Ab6.jpg?q=80&w=1400&auto=format&fit=crop",
-      img: "/images/about/Ab6.jpg?q=100&w=1400&h=1200&auto=format",
+      img: "/images/about/Ab6.webp",
       content: <p>We partner with boutiques, designers and global brands to co-create collections with integrity and craft.</p>,
     },
     {
       id: "sustain",
       title: "Sustainability",
-      img: "/images/about/Ab7.jpg?q=100&w=1400&h=115%&auto=format",
+      img: "/images/about/Ab7.webp",
       content: <p>Eco-friendly dyes, ethical sourcing and minimal waste are core to our process.</p>,
     },
   ];
@@ -124,7 +125,7 @@ export default function AboutContent() {
       <div className="reveal mb-8">
         <PageHero
         className="container "
-          imageUrl="/images/about/Abm1.jpg"
+          imageUrl="/images/about/Abm1.webp"
           title={<AnimatedHeading level={3} className="text-3xl md:text-4xl font-extrabold">About The Applique – The Art of Handcrafted Perfection</AnimatedHeading>}
           subtitle={<p className="mt-3  leading-relaxed max-w-2xl">At The Applique, we believe every fabric tells a story — a story of craftsmanship, culture, and creativity. Rooted in the vibrant textile heritage of Jaipur, India, we are a leading hand block printing manufacturer and exporter, dedicated to preserving India’s age-old printing traditions while meeting the dynamic demands of modern global markets.</p>}
         />
@@ -137,7 +138,7 @@ export default function AboutContent() {
               <div className={`md:col-span-6 ${i % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
                 <div className="overflow-hidden rounded-md media-card" >
                 {/* <div className="relative w-full aspect-[4/3] rounded-md overflow-hidden bg-gray-100"> */}
-                  <img src={it.img} alt={it.title} loading="lazy" className=" w-full h-full object-scale-down" style={{height: '115%', width: "140%"}} />
+                  <OptimizedImage src={it.img} alt={it.title}  className=" w-full " sizes="(max-width: 768px) 100vw, 50vw" objectFit="cover" />
                 </div>
               </div>
 

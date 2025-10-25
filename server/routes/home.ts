@@ -10,7 +10,7 @@ export const handleHome: RequestHandler = (_req, res) => {
         subtitle: "Where design met creativity",
         // ctaLabel: "Shop Now",
         // ctaHref: "/shop",
-        imageUrl: "/images/slider/hs1.jpg?q=80&w=1400&auto=format&fit=crop",
+        imageUrl: "/images/slider/hs1.webp",
       },
       {
         id: "slide-2",
@@ -18,7 +18,7 @@ export const handleHome: RequestHandler = (_req, res) => {
         subtitle: "Breezy silhouettes in stark contrasts",
         // ctaLabel: "Explore Collection",
         // ctaHref: "/collections",
-        imageUrl: "/images/slider/hs2.jpg?q=80&w=1400&auto=format&fit=crop",
+        imageUrl: "/images/slider/hs2.webp",
       },
       {
         id: "slide-3",
@@ -26,7 +26,7 @@ export const handleHome: RequestHandler = (_req, res) => {
         subtitle: "Breezy silhouettes in stark contrasts",
         // ctaLabel: "Explore Collection",
         // ctaHref: "/collections",
-        imageUrl: "/images/slider/hs3.jpg?q=80&w=1400&auto=format&fit=crop",
+        imageUrl: "/images/slider/hs3.webp",
       },
       {
         id: "slide-4",
@@ -34,7 +34,7 @@ export const handleHome: RequestHandler = (_req, res) => {
         subtitle: "Breezy silhouettes in stark contrasts",
         // ctaLabel: "Explore Collection",
         // ctaHref: "/collections",
-        imageUrl: "/images/slider/hs4.jpg?q=80&w=1400&auto=format&fit=crop",
+        imageUrl: "/images/slider/hs4.webp",
       },
     ],
     collections: [
@@ -92,12 +92,12 @@ export const handleHome: RequestHandler = (_req, res) => {
       },
     ],
     instagram: [
-      { id: "ig-1", href: "https://www.instagram.com/p/C4jsK3cPUZV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I1.jpg" },
-      { id: "ig-2", href: "https://www.instagram.com/p/C2eyYOHvYBJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I2.jpg" },
-      { id: "ig-3", href: "https://www.instagram.com/p/C2coJ_vPjPk/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I3.jpg" },
-      { id: "ig-4", href: "https://www.instagram.com/p/Cr3FraQoRqy/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I4.jpg" },
-      { id: "ig-5", href: "https://www.instagram.com/p/CC0nqWXl7RJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I5.jpg" },
-      { id: "ig-6", href: "https://www.instagram.com/p/CBLhLotJzvl/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I6.jpg" },
+      { id: "ig-1", href: "https://www.instagram.com/p/C4jsK3cPUZV/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I1.webp" },
+      { id: "ig-2", href: "https://www.instagram.com/p/C2eyYOHvYBJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I2.webp" },
+      { id: "ig-3", href: "https://www.instagram.com/p/C2coJ_vPjPk/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I3.webp" },
+      { id: "ig-4", href: "https://www.instagram.com/p/Cr3FraQoRqy/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I4.webp" },
+      { id: "ig-5", href: "https://www.instagram.com/p/CC0nqWXl7RJ/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I5.webp" },
+      { id: "ig-6", href: "https://www.instagram.com/p/CBLhLotJzvl/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==", imageUrl: "/images/instagram/I6.webp" },
     ],
   };
 
