@@ -423,6 +423,22 @@
   }
 }
 
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.animate-fadeInUp {
+  animation: fadeInUp 0.8s ease-out forwards;
+  opacity: 0;
+}
+
 /* Play button styles */
 .play-button-overlay {
   position: absolute;
@@ -602,20 +618,24 @@
   background: rgba(255, 255, 255, 0.7);
 }
 
-/* Image Optimization Styles - Add these to your existing global.css */
+/* ==========================================
+   IMAGE OPTIMIZATION & LOADING STYLES
+   ========================================== */
 
 /* Optimize image rendering */
 img {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
+  max-width: 100%;
+  height: auto;
 }
 
-/* Prevent layout shift with aspect-ratio */
+/* Prevent layout shift */
 img[width][height] {
   height: auto;
 }
 
-/* Hardware acceleration for images */
+/* Hardware acceleration */
 .media-card img,
 .interactive img,
 .hero-image,
@@ -625,15 +645,16 @@ img[width][height] {
   -webkit-backface-visibility: hidden;
 }
 
-/* Optimize animations */
-@media (prefers-reduced-motion: no-preference) {
-  .media-card img,
-  .interactive img {
-    will-change: transform;
+/* Progressive image loading shimmer */
+@keyframes shimmer {
+  0% {
+    background-position: -1000px 0;
+  }
+  100% {
+    background-position: 1000px 0;
   }
 }
 
-/* Progressive image loading */
 .progressive-image {
   position: relative;
   overflow: hidden;
@@ -643,68 +664,377 @@ img[width][height] {
     hsl(var(--muted) / 0.8) 50%,
     hsl(var(--muted)) 100%
   );
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite linear;
+}
+
+/* ==========================================
+   ENHANCED ANIMATIONS
+   ========================================== */
+
+/* Fade in with scale */
+@keyframes fadeInScale {
+  from {
+    opacity: 0;
+    transform: scale(0.95) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Slide in from bottom */
+@keyframes slideInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Slide in from left */
+@keyframes slideInLeft {
+  from {
+    opacity: 0;
+    transform: translateX(-30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Slide in from right */
+@keyframes slideInRight {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+/* Pulse animation */
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  50% {
+    transform: scale(1.05);
+    opacity: 0.8;
+  }
+}
+
+/* Bounce animation */
+@keyframes bounce {
+  0%, 100% {
+    transform: translateY(0);
+  }
+  50% {
+    transform: translateY(-10px);
+  }
+}
+
+/* Apply animations */
+.animate-fadeInScale {
+  animation: fadeInScale 0.6s ease-out forwards;
+}
+
+.animate-slideInUp {
+  animation: slideInUp 0.6s ease-out forwards;
+}
+
+.animate-slideInLeft {
+  animation: slideInLeft 0.6s ease-out forwards;
+}
+
+.animate-slideInRight {
+  animation: slideInRight 0.6s ease-out forwards;
+}
+
+.animate-pulse {
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.animate-bounce {
+  animation: bounce 1s ease-in-out infinite;
+}
+
+/* ==========================================
+   MOBILE OPTIMIZATIONS
+   ========================================== */
+
+/* Better touch targets */
+@media (max-width: 640px) {
+  button, a {
+    min-height: 44px; /* iOS recommended touch target */
+    min-width: 44px;
+  }
+
+  /* Reduce motion on mobile for performance */
+  .hero-slide {
+    perspective: 800px;
+  }
+
+  /* Faster animations on mobile */
+  .reveal.in-view {
+    transition-duration: 400ms !important;
+  }
+
+  /* Better image sizing on mobile */
+  .media-card {
+    height: 12rem;
+  }
+
+  /* Optimize parallax for mobile */
+  .parallax-image {
+    transform: none !important;
+  }
+}
+
+/* ==========================================
+   IMPROVED HOVER EFFECTS
+   ========================================== */
+
+/* Smooth hover transitions */
+.interactive {
+  transition: transform 350ms cubic-bezier(0.2, 0.9, 0.3, 1),
+              box-shadow 350ms ease,
+              filter 250ms ease;
+}
+
+.interactive:hover {
+  transform: translateY(-6px) scale(1.02);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+  filter: saturate(1.05) brightness(1.02);
+}
+
+/* Link hover effect */
+a:not(.no-hover) {
+  position: relative;
+  transition: color 0.3s ease;
+}
+
+a:not(.no-hover)::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: currentColor;
+  transition: width 0.3s ease;
+}
+
+a:not(.no-hover):hover::after {
+  width: 100%;
+}
+
+/* ==========================================
+   IMPROVED MEDIA CARDS
+   ========================================== */
+
+.media-card {
+  overflow: hidden;
+  border-radius: 0.5rem;
+  position: relative;
+}
+
+.media-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(255, 255, 255, 0.1) 0%,
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  z-index: 1;
+}
+
+.media-card:hover::before {
+  opacity: 1;
+}
+
+.media-card img {
+  transition: transform 450ms cubic-bezier(0.2, 0.9, 0.3, 1),
+              filter 450ms ease;
+}
+
+.media-card:hover img {
+  transform: scale(1.05);
+  filter: saturate(1.08) brightness(1.03);
+}
+
+/* ==========================================
+   LOADING STATES
+   ========================================== */
+
+/* Skeleton loader */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    hsl(var(--muted)) 0%,
+    hsl(var(--muted) / 0.6) 50%,
+    hsl(var(--muted)) 100%
+  );
   background-size: 200% 100%;
   animation: shimmer 1.5s infinite;
+  border-radius: 0.5rem;
 }
 
-@keyframes shimmer {
-  0% {
-    background-position: -200% 0;
-  }
-  100% {
-    background-position: 200% 0;
-  }
+/* Loading spinner */
+.spinner {
+  border: 3px solid hsl(var(--foreground) / 0.1);
+  border-top-color: hsl(var(--foreground) / 0.6);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
 }
 
-/* Blur-up placeholder effect */
-.image-blur-placeholder {
-  filter: blur(20px);
-  transform: scale(1.1);
-  transition: filter 0.5s ease-out, transform 0.5s ease-out;
-}
-
-.image-blur-placeholder.loaded {
-  filter: blur(0);
-  transform: scale(1);
-}
-
-/* Optimize video loading */
-video {
-  transform: translateZ(0);
-  backface-visibility: hidden;
-}
-
-/* Preload critical images hint */
-link[rel="preload"][as="image"] {
-  /* Browser will prioritize these */
-}
-
-/* Lazy loading optimization */
-img[loading="lazy"] {
-  /* Native lazy loading is hardware accelerated */
-  content-visibility: auto;
-}
-
-/* Reduce motion for accessibility */
-@media (prefers-reduced-motion: reduce) {
-  .progressive-image {
-    animation: none;
-  }
-  
-  img {
-    transition: none !important;
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
   }
 }
 
-/* Modern image formats support */
-@supports (image-rendering: -webkit-optimize-contrast) {
-  img {
-    image-rendering: -webkit-optimize-contrast;
-  }
+/* ==========================================
+   SCROLL ANIMATIONS
+   ========================================== */
+
+/* Smooth reveal on scroll */
+.reveal {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
 }
 
-/* GPU acceleration for transforms */
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animations */
+.reveal:nth-child(1) { transition-delay: 0s; }
+.reveal:nth-child(2) { transition-delay: 0.1s; }
+.reveal:nth-child(3) { transition-delay: 0.2s; }
+.reveal:nth-child(4) { transition-delay: 0.3s; }
+.reveal:nth-child(5) { transition-delay: 0.4s; }
+
+/* ==========================================
+   PERFORMANCE OPTIMIZATIONS
+   ========================================== */
+
+/* GPU acceleration hints */
 .transform-gpu {
   transform: translateZ(0);
   will-change: transform;
+}
+
+/* Optimize expensive properties */
+@media (prefers-reduced-motion: no-preference) {
+  .will-animate {
+    will-change: transform, opacity;
+  }
+}
+
+/* Remove will-change after animation */
+.will-animate.animated {
+  will-change: auto;
+}
+
+/* ==========================================
+   ACCESSIBILITY
+   ========================================== */
+
+/* Respect reduced motion preference */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+
+  .progressive-image {
+    animation: none;
+  }
+}
+
+/* Focus visible for keyboard navigation */
+:focus-visible {
+  outline: 2px solid hsl(var(--primary));
+  outline-offset: 2px;
+}
+
+/* ==========================================
+   WHATSAPP BUTTON STYLES
+   ========================================== */
+
+.whatsapp-button {
+  position: fixed;
+  bottom: 1.5rem;
+  right: 1.5rem;
+  z-index: 50;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.whatsapp-button:hover {
+  transform: scale(1.1);
+}
+
+.whatsapp-button:active {
+  transform: scale(0.95);
+}
+
+/* ==========================================
+   RESPONSIVE UTILITIES
+   ========================================== */
+
+/* Better mobile spacing */
+@media (max-width: 640px) {
+  .container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+
+  /* Smaller text on mobile */
+  h1 { font-size: 1.875rem; }
+  h2 { font-size: 1.5rem; }
+  h3 { font-size: 1.25rem; }
+}
+
+/* Tablet adjustments */
+@media (min-width: 641px) and (max-width: 1024px) {
+  .container {
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+  }
+}
+
+/* ==========================================
+   PRINT STYLES
+   ========================================== */
+
+@media print {
+  .whatsapp-button,
+  header,
+  footer {
+    display: none !important;
+  }
+
+  * {
+    animation: none !important;
+    transition: none !important;
+  }
 }

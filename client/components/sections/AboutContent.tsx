@@ -84,7 +84,7 @@ export default function AboutContent() {
       id: "collabs",
       title: "Design Partnerships",
       // img: "/images/about/Ab6.jpg?q=80&w=1400&auto=format&fit=crop",
-      img: "/images/about/Ab6.webp",
+      img: "/images/about/Ab6.jpg",
       content: <p>We partner with boutiques, designers and global brands to co-create collections with integrity and craft.</p>,
     },
     {

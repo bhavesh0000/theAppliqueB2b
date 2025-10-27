@@ -8,9 +8,10 @@ interface OptimizedImageProps {
   width?: number;
   height?: number;
   priority?: boolean;
-  objectFit?: "cover" | "contain" | "fill" | "scale-down";
+  objectFit?: "cover" | "contain" | "fill" | "scale-down" | "none";
   onLoad?: () => void;
   sizes?: string;
+  aspectRatio?: string;
 }
 
 export default function OptimizedImage({
@@ -23,13 +24,13 @@ export default function OptimizedImage({
   objectFit = "cover",
   onLoad,
   sizes,
+  aspectRatio,
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
   const imgRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
-  // Intersection Observer for lazy loading
   useEffect(() => {
     if (priority || isInView) return;
 
@@ -43,7 +44,7 @@ export default function OptimizedImage({
         });
       },
       {
-        rootMargin: "50px", // Start loading 50px before image enters viewport
+        rootMargin: "150px",
         threshold: 0.01,
       }
     );
@@ -55,15 +56,11 @@ export default function OptimizedImage({
     return () => observer.disconnect();
   }, [priority, isInView]);
 
-  // Generate srcset for responsive images
   const generateSrcSet = (originalSrc: string) => {
-    // Remove query parameters to generate variants
     const baseSrc = originalSrc.split("?")[0];
-    
-    // Generate WebP versions if possible
-    const sizes = [400, 800, 1200, 1600];
+    const sizes = [320, 640, 768, 1024, 1280, 1536];
     return sizes
-      .map((size) => `${baseSrc}?w=${size}&auto=format&q=80 ${size}w`)
+      .map((size) => `${baseSrc}?w=${size}&q=70&auto=format ${size}w`)
       .join(", ");
   };
 
@@ -72,37 +69,45 @@ export default function OptimizedImage({
     onLoad?.();
   };
 
+  const getAspectRatio = () => {
+    if (aspectRatio) return aspectRatio;
+    if (width && height) return `${width} / ${height}`;
+    return undefined;
+  };
+
   return (
     <div
       ref={containerRef}
-      className={cn("relative overflow-hidden bg-muted", className)}
+      className={cn("relative overflow-hidden bg-muted/20", className)}
       style={{
-        aspectRatio: width && height ? `${width} / ${height}` : undefined,
+        aspectRatio: getAspectRatio(),
       }}
     >
-      {/* Blur placeholder */}
       {!isLoaded && (
-        <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-muted/50 to-muted" />
+        <div className="absolute inset-0">
+          <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-muted/30 via-muted/15 to-muted/30" />
+        </div>
       )}
 
-      {/* Actual image - only load when in view or priority */}
       {isInView && (
         <img
           ref={imgRef}
           src={src}
           alt={alt}
           srcSet={generateSrcSet(src)}
-          sizes={sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
+          sizes={sizes || "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
+          fetchPriority={priority ? "high" : "auto"}
           onLoad={handleLoad}
           className={cn(
-            "w-full h-full transition-opacity duration-500",
-            isLoaded ? "opacity-100" : "opacity-0",
+            "w-full h-full transition-all duration-500",
+            isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95",
             objectFit === "cover" && "object-cover",
             objectFit === "contain" && "object-contain",
             objectFit === "fill" && "object-fill",
-            objectFit === "scale-down" && "object-scale-down"
+            objectFit === "scale-down" && "object-scale-down",
+            objectFit === "none" && "object-none"
           )}
           style={{
             objectPosition: "center",
@@ -110,10 +115,9 @@ export default function OptimizedImage({
         />
       )}
 
-      {/* Loading spinner for priority images */}
       {priority && !isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-8 w-8 animate-spin rounded-full border-4 border-foreground/20 border-t-foreground/60" />
+          <div className="h-6 w-6 md:h-8 md:w-8 animate-spin rounded-full border-3 border-foreground/10 border-t-foreground/50" />
         </div>
       )}
     </div>

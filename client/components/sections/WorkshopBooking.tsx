@@ -227,7 +227,7 @@ import { Carousel, CarouselContent, CarouselItem, type CarouselApi } from "@/com
 import OptimizedImage from "@/components/ui/OptimizedImage";
 
 export default function WorkshopBooking() {
-  const images = ["/images/workshop/wb1.jpg", "/images/workshop/wb3.jpg", "/images/workshop/wb4.jpg"];
+  const images = ["/images/workshop/wb1.webp", "/images/workshop/wb3.webp", "/images/workshop/wb4.webp"];
 
   const [api, setApi] = useState<CarouselApi | null>(null);
   const [paused, setPaused] = useState(false);
