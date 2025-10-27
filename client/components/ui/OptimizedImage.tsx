@@ -8,10 +8,9 @@ interface OptimizedImageProps {
   width?: number;
   height?: number;
   priority?: boolean;
-  objectFit?: "cover" | "contain" | "fill" | "scale-down" | "none";
+  objectFit?: "cover" | "contain" | "fill" | "scale-down";
   onLoad?: () => void;
   sizes?: string;
-  aspectRatio?: string;
 }
 
 export default function OptimizedImage({
@@ -24,13 +23,13 @@ export default function OptimizedImage({
   objectFit = "cover",
   onLoad,
   sizes,
-  aspectRatio,
 }: OptimizedImageProps) {
   const [isLoaded, setIsLoaded] = useState(false);
   const [isInView, setIsInView] = useState(priority);
   const imgRef = useRef<HTMLImageElement>(null);
   const containerRef = useRef<HTMLDivElement>(null);
 
+  // Intersection Observer for lazy loading
   useEffect(() => {
     if (priority || isInView) return;
 
@@ -44,7 +43,7 @@ export default function OptimizedImage({
         });
       },
       {
-        rootMargin: "150px",
+        rootMargin: "50px", // Start loading 50px before image enters viewport
         threshold: 0.01,
       }
     );
@@ -56,12 +55,38 @@ export default function OptimizedImage({
     return () => observer.disconnect();
   }, [priority, isInView]);
 
+  // Generate srcset for responsive images
   const generateSrcSet = (originalSrc: string) => {
+    // Remove query parameters and get base path
     const baseSrc = originalSrc.split("?")[0];
-    const sizes = [320, 640, 768, 1024, 1280, 1536];
-    return sizes
-      .map((size) => `${baseSrc}?w=${size}&q=70&auto=format ${size}w`)
-      .join(", ");
+    
+    // Remove file extension
+    const lastDot = baseSrc.lastIndexOf(".");
+    const baseWithoutExt = lastDot > 0 ? baseSrc.substring(0, lastDot) : baseSrc;
+    const ext = lastDot > 0 ? baseSrc.substring(lastDot) : ".webp";
+    
+    // Use .webp extension if available, otherwise keep original
+    const webpExt = ext.toLowerCase().includes(".webp") ? ext : ".webp";
+    
+    // Define responsive variants matching compression script output
+    const variants = [
+      { suffix: "-mobile", width: 400 },
+      { suffix: "-sm", width: 640 },
+      { suffix: "-md", width: 768 },
+      { suffix: "-lg", width: 1024 },
+      { suffix: "-xl", width: 1280 },
+      { suffix: "-2xl", width: 1600 },
+    ];
+    
+    // Build srcset with responsive variants
+    const srcsetEntries = variants.map(
+      (variant) => `${baseWithoutExt}${variant.suffix}${webpExt} ${variant.width}w`
+    );
+    
+    // Add original image as fallback
+    srcsetEntries.push(`${baseWithoutExt}${webpExt} 2000w`);
+    
+    return srcsetEntries.join(", ");
   };
 
   const handleLoad = () => {
@@ -69,55 +94,50 @@ export default function OptimizedImage({
     onLoad?.();
   };
 
-  const getAspectRatio = () => {
-    if (aspectRatio) return aspectRatio;
-    if (width && height) return `${width} / ${height}`;
-    return undefined;
-  };
-
   return (
     <div
       ref={containerRef}
-      className={cn("relative overflow-hidden bg-muted/20", className)}
+      className={cn("relative overflow-hidden bg-muted", className)}
       style={{
-        aspectRatio: getAspectRatio(),
+        aspectRatio: width && height ? `${width} / ${height}` : undefined,
       }}
     >
+      {/* Blur placeholder */}
       {!isLoaded && (
-        <div className="absolute inset-0">
-          <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-muted/30 via-muted/15 to-muted/30" />
-        </div>
+        <div className="absolute inset-0 animate-pulse bg-gradient-to-br from-muted/50 to-muted" />
       )}
 
+      {/* Actual image - only load when in view or priority */}
       {isInView && (
         <img
           ref={imgRef}
           src={src}
           alt={alt}
           srcSet={generateSrcSet(src)}
-          sizes={sizes || "(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"}
+          sizes={sizes || "(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"}
           loading={priority ? "eager" : "lazy"}
           decoding="async"
-          fetchPriority={priority ? "high" : "auto"}
           onLoad={handleLoad}
           className={cn(
-            "w-full h-full transition-all duration-500",
-            isLoaded ? "opacity-100 scale-100" : "opacity-0 scale-95",
-            objectFit === "cover" && "object-cover",
-            objectFit === "contain" && "object-contain",
+            "w-full h-full transition-opacity duration-500",
+            isLoaded ? "opacity-100" : "opacity-0",
+            objectFit === "cover" && "object-cover object-center",
+            objectFit === "contain" && "object-contain object-center",
             objectFit === "fill" && "object-fill",
-            objectFit === "scale-down" && "object-scale-down",
-            objectFit === "none" && "object-none"
+            objectFit === "scale-down" && "object-scale-down object-center"
           )}
           style={{
             objectPosition: "center",
+            maxWidth: "100%",
+            maxHeight: "100%",
           }}
         />
       )}
 
+      {/* Loading spinner for priority images */}
       {priority && !isLoaded && (
         <div className="absolute inset-0 flex items-center justify-center">
-          <div className="h-6 w-6 md:h-8 md:w-8 animate-spin rounded-full border-3 border-foreground/10 border-t-foreground/50" />
+          <div className="h-8 w-8 animate-spin rounded-full border-4 border-foreground/20 border-t-foreground/60" />
         </div>
       )}
     </div>

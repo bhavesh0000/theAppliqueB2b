@@ -1038,3 +1038,8 @@ a:not(.no-hover):hover::after {
     transition: none !important;
   }
 }
+/* fix rotated images */
+img[src*="hm1"],
+img[src*="hm2"] {
+  transform: rotate(-90deg) !important;
+}
