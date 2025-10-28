@@ -1092,3 +1092,175 @@ img[src*="hm1"],
 img[src*="hm2"] {
   transform: rotate(-90deg) !important;
 }
+/* ==========================================
+   SMOOTH CAROUSEL TRANSITIONS
+   ========================================== */
+
+/* Smooth carousel container */
+.carousel-smooth {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* Smooth slide transitions */
+.carousel-smooth > * {
+  transition: transform 600ms cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity 600ms ease-out;
+}
+
+/* Embla-specific smooth transitions (if using Embla carousel) */
+.embla__container {
+  transition-timing-function: cubic-bezier(0.25, 0.46, 0.45, 0.94) !important;
+}
+
+.embla__slide {
+  transition: opacity 400ms ease-in-out;
+}
+
+/* Prevent flickering during transitions */
+.hero-slide {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  -moz-backface-visibility: hidden;
+  transform: translateZ(0);
+  -webkit-transform: translateZ(0);
+}
+
+/* Smooth image transitions within hero */
+.hero-image img {
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  transform: translateZ(0);
+}
+
+/* Prevent layout shifts */
+.hero-slide,
+.hero-image {
+  contain: layout style paint;
+}
+
+/* GPU acceleration for smoother animations */
+.hero-slide,
+.hero-image,
+.hero-content {
+  will-change: transform;
+}
+
+/* Remove will-change after transition completes */
+.hero-slide:not(:hover),
+.hero-image:not(:hover) {
+  will-change: auto;
+}
+
+/* Smooth fade transitions for images */
+@keyframes smoothFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(1.05);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.hero-image img {
+  animation: smoothFadeIn 700ms ease-out;
+}
+
+/* Prevent FOUC (Flash of Unstyled Content) */
+.carousel-smooth {
+  min-height: 60vh;
+}
+
+@media (min-width: 768px) {
+  .carousel-smooth {
+    min-height: 75vh;
+  }
+}
+
+@media (min-width: 1024px) {
+  .carousel-smooth {
+    min-height: 80vh;
+  }
+}
+
+/* ==========================================
+   CAROUSEL PERFORMANCE OPTIMIZATIONS
+   ========================================== */
+
+/* Reduce motion on mobile for better performance */
+@media (max-width: 768px) {
+  .carousel-smooth > * {
+    transition-duration: 400ms;
+  }
+  
+  .hero-slide {
+    perspective: 800px;
+  }
+  
+  /* Disable parallax on mobile for smoother scrolling */
+  .hero-image {
+    transform: translate3d(0, 0, 0) !important;
+  }
+  
+  .hero-content {
+    transform: translate3d(0, 0, 0) !important;
+  }
+}
+
+/* Respect user's motion preferences */
+@media (prefers-reduced-motion: reduce) {
+  .carousel-smooth,
+  .carousel-smooth > *,
+  .hero-slide,
+  .hero-image img {
+    transition-duration: 0.01ms !important;
+    animation-duration: 0.01ms !important;
+  }
+  
+  .hero-image,
+  .hero-content {
+    transform: none !important;
+  }
+}
+
+/* ==========================================
+   HARDWARE ACCELERATION
+   ========================================== */
+
+/* Force GPU acceleration for carousel */
+.carousel-smooth,
+.carousel-smooth > *,
+.hero-slide,
+.hero-image {
+  transform: translate3d(0, 0, 0);
+  -webkit-transform: translate3d(0, 0, 0);
+}
+
+/* ==========================================
+   ANTI-ALIASING
+   ========================================== */
+
+.hero-image img {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+}
+
+/* ==========================================
+   STAGGER ANIMATIONS FOR HERO CONTENT
+   ========================================== */
+
+/* Stagger animations for hero content */
+.hero-content > *:nth-child(1) {
+  animation-delay: 0s;
+}
+
+.hero-content > *:nth-child(2) {
+  animation-delay: 0.1s;
+}
+
+.hero-content > *:nth-child(3) {
+  animation-delay: 0.2s;
+}

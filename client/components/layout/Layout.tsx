@@ -95,6 +95,8 @@
 import { Header } from "./Header";
 import { Footer } from "./Footer";
 import WhatsAppButton from "./WhatsAppButton";
+// import CallButton from "./Callbutton";
+import CallButtonVertical from "./Callbuttonvertical";
 import { ReactNode, useEffect, useRef } from "react";
 import { useLocation } from "react-router-dom";
 
@@ -162,6 +164,7 @@ export default function Layout({ children }: { children: ReactNode }) {
       <Header />
       <main ref={containerRef} className="flex-1 page-transition">{children}</main>
       <Footer />
+      <CallButtonVertical />
       <WhatsAppButton />
     </div>
   );
