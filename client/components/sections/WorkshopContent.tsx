@@ -65,7 +65,7 @@ export default function WorkshopContent() {
       <div className="reveal mb-8">
         <PageHero
           videoUrl="/images/workshop/wbv1.mp4"
-          // imageUrl="/images/workshop/wbmm1.jpg?q=80&w=1800&auto=format&fit=crop"
+          imageUrl="/images/workshop/wbv1.webp?q=80&w=1800&auto=format&fit=crop"
           title={<span>Experience the Art of Hand Block Printing – Applique Workshop</span>}
           subtitle={<p className=" leading-relaxed max-w-2xl" >At Applique, we don’t just create fabrics — we celebrate the story behind them. Our Hand Block Printing Workshop invites you to step into the heart of Jaipur’s artistic heritage and experience the age-old process of textile printing. Want to join? <a href="/contact" className="underline">Contact us</a> or see related <a href="/collections" className="underline">Collections</a>.</p>}
         />
