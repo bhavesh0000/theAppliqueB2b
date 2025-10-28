@@ -369,7 +369,7 @@ export default function WorkshopBooking() {
                       src={src}
                       alt={`Workshop ${i + 1}`}
                       className="h-80 w-full"
-                      objectFit="scale-down"
+                      objectFit="contain"
                       priority={i === 0}
                       sizes="(max-width: 768px) 100vw, 50vw"
                     />

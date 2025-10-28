@@ -50,7 +50,7 @@ export default function WorkshopContent() {
     },
     {
       title: 'A Creative Collaboration Between Buyer & Artisan',
-      img: '/images/workshop/wbm4.webp',
+      img: '/images/workshop/wbm4.jpg',
       content: (
         <>
           <p className="text-foreground/80 mb-2">At Applique, we believe creativity thrives when people connect with craftsmanship. Through our workshop, international buyers and designers can collaborate directly with artisans — understanding the nuances of design, scale, and pattern repetition that influence final collections.</p>
@@ -77,7 +77,7 @@ export default function WorkshopContent() {
             <div className="grid grid-cols-1 md:grid-cols-12 gap-6 items-center">
               <div className={`md:col-span-6 ${i % 2 === 0 ? 'md:order-1' : 'md:order-2'}`}>
                 <div className="overflow-hidden rounded-md media-card">
-                  <OptimizedImage src={b.img} alt={b.title}  className="w-full" objectFit="cover" sizes="(max-width: 768px) 100vw, 50vw" />
+                  <OptimizedImage src={b.img} alt={b.title}  className="w-full" objectFit="contain" sizes="(max-width: 768px) 100vw, 50vw" />
                 </div>
               </div>
 

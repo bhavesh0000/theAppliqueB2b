@@ -668,6 +668,23 @@ img[width][height] {
   animation: shimmer 2s infinite linear;
 }
 
+/* Portrait image container support */
+.portrait-image-container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  max-height: 80vh;
+  min-height: 400px;
+}
+
+.portrait-image-container img {
+  width: auto !important;
+  height: auto !important;
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain !important;
+}
+
 /* ==========================================
    ENHANCED ANIMATIONS
    ========================================== */
@@ -797,6 +814,12 @@ img[width][height] {
   .parallax-image {
     transform: none !important;
   }
+
+  /* Portrait images on mobile - allow full height */
+  .portrait-image-container {
+    max-height: 100vh;
+    min-height: 300px;
+  }
 }
 
 /* ==========================================
@@ -873,6 +896,22 @@ a:not(.no-hover):hover::after {
 .media-card:hover img {
   transform: scale(1.05);
   filter: saturate(1.08) brightness(1.03);
+}
+
+/* Portrait images in media cards */
+.media-card.portrait-card {
+  height: auto;
+  min-height: 400px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.media-card.portrait-card img {
+  width: auto !important;
+  height: 100%;
+  max-height: 600px;
+  object-fit: contain;
 }
 
 /* ==========================================
@@ -1022,6 +1061,15 @@ a:not(.no-hover):hover::after {
   }
 }
 
+/* Desktop - ensure portrait images display properly */
+@media (min-width: 1025px) {
+  /* Portrait images get proper height on desktop */
+  .portrait-image-container {
+    max-height: 85vh;
+    min-height: 500px;
+  }
+}
+
 /* ==========================================
    PRINT STYLES
    ========================================== */
@@ -1038,6 +1086,7 @@ a:not(.no-hover):hover::after {
     transition: none !important;
   }
 }
+
 /* fix rotated images */
 img[src*="hm1"],
 img[src*="hm2"] {
