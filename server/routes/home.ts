@@ -86,7 +86,7 @@ export const handleHome: RequestHandler = (_req, res) => {
         title: "Crafted in India",
         subtitle: "Ethically made in small batches",
         // href: "/about",
-        videoUrl: "/video/Bv.mp4", // Add your video URL here
+        videoUrl: "https://www.youtube.com/watch?v=sYXbRQpzgX0", // Add your video URL here
         posterImage: "/images/banner-poster.jpg", // Optional: poster image for video
         isVideo: true,
       },
