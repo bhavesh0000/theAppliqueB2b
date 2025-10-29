@@ -50,7 +50,7 @@ export function Footer() {
   const socialLinks = {
     instagram: "https://www.instagram.com/appliquet/",
     whatsapp: "https://wa.me/9602456367", // Replace with your WhatsApp number
-    facebook: "https://facebook.com/theapplique",
+    facebook: "https://www.facebook.com/people/The-Applique/100064569978723/",
     linkedin: "https://linkedin.com/company/theapplique"
   };
 
