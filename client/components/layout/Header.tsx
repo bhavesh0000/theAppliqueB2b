@@ -2,8 +2,9 @@ import { useState } from "react";
 import { Sheet, SheetContent, SheetHeader, SheetTrigger } from "@/components/ui/sheet";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
+import appliqueLogo from '/images/appliqueLogo.png'
 import { Link } from "react-router-dom";
+
 
 const nav = [
   { href: "/", label: "Home" },
@@ -30,8 +31,15 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="left" className="w-72 bg-background">
               <SheetHeader>
-                <Link to="/" onClick={() => setOpen(false)} className="text-xl tracking-widest font-semibold uppercase">
-                  The Applique
+                <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-2">
+                  <img 
+                    src={appliqueLogo} 
+                    alt="The Applique Logo" 
+                    className="h-15 w-15 md:h-10 md:w-10 object-cover hidden md:block"
+                  />
+                  <span className="text-xl tracking-widest font-semibold uppercase">
+                    The Applique
+                  </span>
                 </Link>
               </SheetHeader>
               <nav className="mt-6 grid gap-1">
@@ -51,8 +59,15 @@ export function Header() {
             </SheetContent>
           </Sheet>
 
-          <Link to="/" className="text-xl md:text-2xl tracking-[0.2em] font-semibold uppercase text-foreground">
-            The Applique
+          <Link to="/" className="flex items-center gap-2 md:gap-3">
+            <img 
+              src="/images/appliqueLogo.png" 
+              alt="The Applique Logo" 
+              className="h-8 w-8 md:h-10 md:w-10 object-contain"
+            />
+            <span className="text-xl md:text-2xl tracking-[0.2em] font-semibold uppercase text-foreground">
+              The Applique
+            </span>
           </Link>
         </div>
 
