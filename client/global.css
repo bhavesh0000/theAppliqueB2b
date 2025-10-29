@@ -1088,10 +1088,9 @@ a:not(.no-hover):hover::after {
 }
 
 /* fix rotated images */
-img[src*="hm1"],
-img[src*="hm2"] {
+/* img[src*="hm11"] {
   transform: rotate(-90deg) !important;
-}
+} */
 /* ==========================================
    SMOOTH CAROUSEL TRANSITIONS
    ========================================== */
