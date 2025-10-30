@@ -6,7 +6,7 @@ export const handleHome: RequestHandler = (_req, res) => {
     hero: [
       {
         id: "slide-1",
-        title: "Authentic Hand Block Printing — Crafted by Skilled Artisans of Rajasthan",
+        title: "Authentic Hand Block Printing - Crafted by Skilled Artisans of Rajasthan",
         subtitle: "Experience centuries-old craftsmanship where every wooden block, natural dye, and careful press creates a masterpiece. The Applique brings you India's finest hand-printed textiles — made for global brands and boutiques.",
         // ctaLabel: "",
         // ctaHref: "/About",
@@ -14,7 +14,7 @@ export const handleHome: RequestHandler = (_req, res) => {
       },
       {
         id: "slide-2",
-        title: "From Handprint to Haute Stitch — Perfection in Every Detail",
+        title: "From Handprint to Haute Stitch - Perfection in Every Detail",
         subtitle: "Our skilled tailors transform hand-printed fabrics into premium apparel and décor. With precision stitching, custom sizing, and export-grade finishing, we deliver quality that meets international standards.",
         // ctaLabel: "our workshop",
         // ctaHref: "/Workshop",
@@ -22,9 +22,9 @@ export const handleHome: RequestHandler = (_req, res) => {
       },
       {
         id: "slide-3",
-        title: "The Applique — Global Supplier of Sustainable Handblock Textiles",
+        title: "The Applique - Global Supplier of Sustainable Handblock Textiles",
         subtitle: "Supplying designers, boutiques, and home décor brands across the world with eco-friendly, ethically crafted hand-printed fabrics. Partner with India's trusted manufacturer for timeless craftsmanship and contemporary design.",
-        ctaLabel: "Partner With Us Today",
+        // ctaLabel: "Partner With Us Today",
         // ctaHref: "/partner",
         imageUrl: "/images/slider/hs3.webp",
       },

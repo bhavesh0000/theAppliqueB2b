@@ -271,7 +271,7 @@ export const handleContact: RequestHandler = async (req, res) => {
             
             <div style="background: #1a1a1a; color: white; padding: 30px 20px; text-align: center;">
               <p style="margin: 0 0 15px 0; font-size: 13px; letter-spacing: 0.05em;">
-                📧 ${process.env.EMAIL_ID} | 📱 ${phone}
+                📧 ${process.env.EMAIL_ID} | 📱 ${process.env.PHONE}
               </p>
               <p style="margin: 0; font-size: 12px; opacity: 0.8;">
                 <a href="https://theapplique.co.in" style="color: white; text-decoration: none; opacity: 0.9;">theapplique.co.in</a>
