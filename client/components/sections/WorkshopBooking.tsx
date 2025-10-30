@@ -397,10 +397,10 @@ export default function WorkshopBooking() {
             style={{ transform: `perspective(900px) rotateX(${contentTilt.rx}deg) rotateY(${contentTilt.ry}deg)` }}
           >
             <h3 className="text-xl font-semibold transform-gpu transition-transform duration-300">Hands-on Workshop</h3>
-            <p className="text-foreground/80 mt-2 mb-4">Join our hands-on atelier workshops where you'll learn traditional applique techniques and make your own piece to take home. Sessions are small and interactive.</p>
+            <p className="text-foreground/80 mt-2 mb-4">Join our hands-on atelier workshops where you'll learn traditional hand-block printing techniques and make your own piece to take home. Sessions are small and interactive.</p>
             <ul className="mb-4 list-disc pl-5 text-foreground/80">
-              <li className="transform transition-transform duration-300 hover:scale-105 hover:-translate-y-1">Duration: 3 hours</li>
-              <li className="transform transition-transform duration-300 hover:scale-105 hover:-translate-y-1">Group size: up to 8 people</li>
+              <li className="transform transition-transform duration-300 hover:scale-105 hover:-translate-y-1">Duration: 1 hours</li>
+              <li className="transform transition-transform duration-300 hover:scale-105 hover:-translate-y-1">Group size: up to 20 people</li>
               <li className="transform transition-transform duration-300 hover:scale-105 hover:-translate-y-1">Materials included</li>
             </ul>
           </div>

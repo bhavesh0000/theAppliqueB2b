@@ -5,7 +5,6 @@ import { cn } from "@/lib/utils";
 import appliqueLogo from '/images/appliqueLogo.png'
 import { Link } from "react-router-dom";
 
-
 const nav = [
   { href: "/", label: "Home" },
   { href: "/about", label: "About" },
@@ -31,12 +30,12 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="left" className="w-72 bg-background">
               <SheetHeader>
-                <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-2">
-                  <img 
+                <Link to="/" onClick={() => setOpen(false)} className="flex items-center gap-3">
+                  {/* <img 
                     src={appliqueLogo} 
                     alt="The Applique Logo" 
-                    className="h-15 w-15 md:h-10 md:w-10 object-cover hidden md:block"
-                  />
+                    className="h-10 w-10 object-cover flex-shrink-0"
+                  /> */}
                   <span className="text-xl tracking-widest font-semibold uppercase">
                     The Applique
                   </span>
@@ -61,9 +60,15 @@ export function Header() {
 
           <Link to="/" className="flex items-center gap-2 md:gap-3">
             <img 
-              src="/images/appliqueLogo.png" 
+              src={appliqueLogo} 
               alt="The Applique Logo" 
-              className="h-8 w-8 md:h-10 md:w-10 object-contain"
+              className=" object-cover "
+              style={{
+                height: '102px',
+                width: '38px',
+                paddingTop: '0px',
+                borderTopWidth: '10px'
+              }}
             />
             <span className="text-xl md:text-2xl tracking-[0.2em] font-semibold uppercase text-foreground">
               The Applique

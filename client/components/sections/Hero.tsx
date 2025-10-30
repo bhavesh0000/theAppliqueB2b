@@ -245,7 +245,7 @@ export default function Hero() {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent" />
 
                 <div className="hero-content absolute bottom-8 left-4 right-4 md:left-12 md:bottom-12 max-w-2xl" style={{color: "rgb(255 255 255 / 78%)"}}>
-                  <h2 className="text-3xl md:text-5xl font-semibold tracking-tight animate-fade-in-up" style={{color: "rgb(255 255 255 / 78%)"}}>{slide.title}</h2>
+                  <h2 className="text-2xl md:text-3xl font-semibold tracking-tight animate-fade-in-up" style={{color: "rgb(255 255 255 / 78%)"}}>{slide.title}</h2>
                   {slide.subtitle && <p className="mt-2 text-foreground/80 md:text-lg animate-fade-in-up animation-delay-200 hidden md:block" style={{color: "rgb(255 255 255 / 78%)"}}>{slide.subtitle}</p>}
                   {slide.ctaHref && slide.ctaLabel && (
                     <a href={slide.ctaHref} className="mt-6 inline-block rounded-md bg-foreground px-6 py-3 text-xs font-semibold tracking-wide uppercase text-background animate-fade-in-up animation-delay-400 hover:scale-105 transition-transform">

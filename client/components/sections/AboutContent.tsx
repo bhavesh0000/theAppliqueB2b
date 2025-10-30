@@ -285,7 +285,7 @@ export default function AboutContent() {
         <PageHero
         className="container "
           imageUrl="/images/about/Abm1.webp"
-          title={<AnimatedHeading level={3} className="text-3xl md:text-4xl font-extrabold">About The Applique – The Art of Handcrafted Perfection</AnimatedHeading>}
+          title={<AnimatedHeading level={3} className="text-2xl md:text-3xl font-extrabold">About The Applique – The Art of Handcrafted Perfection</AnimatedHeading>}
           subtitle={<p className="mt-3  leading-relaxed max-w-2xl hidden md:block">At The Applique, we believe every fabric tells a story — a story of craftsmanship, culture, and creativity. Rooted in the vibrant textile heritage of Jaipur, India, we are a leading hand block printing manufacturer and exporter, dedicated to preserving India's age-old printing traditions while meeting the dynamic demands of modern global markets.</p>}
         />
       </div>

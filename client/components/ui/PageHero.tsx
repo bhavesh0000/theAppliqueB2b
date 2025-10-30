@@ -120,7 +120,7 @@ export default function PageHero({ imageUrl, videoUrl, title, subtitle, classNam
       
       <div className="hero-inner">
         {title && (
-          <div className="hero-title text-3xl md:text-4xl font-extrabold" style={{color: "rgb(255 255 255 / 78%)"}}>
+          <div className="hero-title text-2xl md:text-3xl font-extrabold" style={{color: "rgb(255 255 255 / 78%)"}}>
             {title}
           </div>
         )}
