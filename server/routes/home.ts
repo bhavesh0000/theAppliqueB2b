@@ -30,8 +30,8 @@ export const handleHome: RequestHandler = (_req, res) => {
       },
       {
         id: "slide-4",
-        title: "Applique",
-        subtitle: "Where design met creativity",
+        title: "Precision in Every Stitch - Crafting Quality You Can Feel",
+        subtitle: "Our skilled artisans stitch handblock-printed fabrics with perfection, blending traditional craftsmanship and modern tailoring for global fashion and décor brands.",
         // ctaLabel: "Explore Collection",
         // ctaHref: "/collections",
         imageUrl: "/images/slider/hs4.webp",
