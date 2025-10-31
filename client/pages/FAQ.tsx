@@ -66,7 +66,7 @@ const faqs: FAQItem[] = [
   {
     id: 10,
     question: "How can I place an order or get a quotation?",
-    answer: "You can reach us via:\n\n• Email: info@theapplique.co.in\n• Fill out our \"Enquiry Form\" on our website\n\nOur team will share the product catalog, price list, and sample options within 24 hours.",
+    answer: "You can reach us via:\n\n• Email: bverma@theapplique.co.in\n• Fill out our \"Enquiry Form\" on our website\n\nOur team will share the product catalog, price list, and sample options within 24 hours.",
     imageCount: 0,
   },
   {
