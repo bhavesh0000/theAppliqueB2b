@@ -287,7 +287,7 @@ export default function FAQ() {
               </p>
               <div className="flex gap-4 justify-center flex-wrap">
                 <a
-                  href="mailto:info@theapplique.co.in"
+                  href="mailto:bverma@theapplique.co.in"
                   className="px-8 py-3 bg-gradient-to-r from-foreground to-foreground/90 text-background rounded-lg font-semibold hover:shadow-lg hover:shadow-foreground/20 transition-all duration-300 hover:scale-105"
                 >
                   Email Us
